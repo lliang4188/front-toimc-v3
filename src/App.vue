@@ -1,30 +1,104 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <imooc-header></imooc-header>
   <router-view/>
+  <imooc-footer></imooc-footer>
 </template>
-
+<script lang="ts">
+import Footer from '@/components/Footer.vue'
+import Header from '@/components/Header.vue'
+import { defineComponent } from 'vue'
+export default defineComponent({
+  components: {
+    'imooc-header': Header,
+    'imooc-footer': Footer
+  }
+})
+</script>
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "./assets/css/global.css";
+@import "./assets/css/layui-layer/layer.css";
+.svg {
+  float: left;
+  position: relative;
+  top: -4px;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.gray{
+  color: #999;
+}
+.text-center{
+  text-align: center;
+}
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+@for $i from 0 to 5 {
+  .pd#{$i * 10} {
+    padding: $i * 10 + px !important;
+  }
+  .pt#{$i * 10} {
+    padding-top: $i * 10 + px !important;
+  }
+  .pl#{$i * 10} {
+    padding-left: $i * 10 + px !important;
+  }
+  .pr#{$i * 10} {
+    padding-right: $i * 10 + px !important;
+  }
+  .mr#{$i * 10} {
+    margin-right: $i * 10px !important;
+  }
+  .ml#{$i * 10} {
+     margin-left: $i * 10px !important;
+  }
+}
+.orange{
+  color: #ff5722;
+}
+.pull-right{
+  float: right;
+}
+.d-hide{
+  position: absolute;
+  overflow: hidden;
+  height: 0;
+}
+.d-flex{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  &.flex-start{
+    justify-content: flex-start;
+  }
+  &.flex-end{
+    justify-content: flex-end;
+  }
+  &.flex-center{
+    justify-content: center;
+  }
+}
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes bounceOut {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    Home
+  <div>
+    Rge
   </div>
 </template>
 
@@ -8,6 +8,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Home'
+  setup () {
+    return {}
+  }
 })
 </script>
+
+<style scoped>
+
+</style>
