@@ -6,6 +6,10 @@ export interface UserInfo {
   regmark?: string;
   pic?: string;
   isVip: string;
+  count?: number;
+  isSign?: boolean;
+  lastSign?:string;
+  favs?: number;
 }
 
 export interface LoginInfo {
@@ -35,7 +39,7 @@ export interface ForgetInfo {
 export interface HttpResponse {
   code: number;
   data?: any;
-  msg?: string;
+  msg?: string | Record<string, any>;
   total?: number;
   count?: number;
   favs?: number;

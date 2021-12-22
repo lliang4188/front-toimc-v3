@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
+import store from '@/store'
 import axios from '@/utils/request'
 import qs from 'qs'
-import store from '@/store'
 
 /**
  * 读取文章列表
  * @param {*} options 读取文章列表的参数
  * @returns
  */
-const getList = (options) => {
+const getList = (options:any) => {
   return axios.get('/public/list?' + qs.stringify(options))
 }
 
@@ -21,13 +23,13 @@ const getTop = () => axios.get('/public/topWeek')
 const getLinks = () => axios.get('/public/links')
 
 // 图片上传接口
-const uploadImg = (formData) => axios.post('/content/upload', formData)
+const uploadImg = (formData:any) => axios.post('/content/upload', formData)
 
 // 发帖接口
-const addPost = (data) => axios.post('/content/add', { ...data })
+const addPost = (data:any) => axios.post('/content/add', { ...data })
 
 // 文章详情
-const getDetail = (tid) => {
+const getDetail = (tid:string) => {
   const token = store.state.token
   let headers = {}
   if (token !== '') {
@@ -41,7 +43,7 @@ const getDetail = (tid) => {
 }
 
 // 更新文章，编辑帖子
-const updatePost = (data) => axios.post('/content/update', { ...data })
+const updatePost = (data:any) => axios.post('/content/update', { ...data })
 
 export {
   getList,

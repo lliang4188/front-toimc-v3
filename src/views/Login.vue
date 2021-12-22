@@ -4,7 +4,7 @@
       <div class="layui-tab layui-tab-brief" lay-filter="user">
         <ul class="layui-tab-title">
           <li class="layui-this">登入</li>
-          <li><a :to="{ name: 'reg' }">注册</a></li>
+          <li><router-link :to="{ name: 'reg' }">注册</router-link></li>
         </ul>
         <div class="layui-form layui-tab-content" style="padding: 20px 0">
           <Form v-slot="{ errors }" @submit="submit">
@@ -107,7 +107,7 @@
 
 <script lang="ts">
 import { HttpResponse } from '@/common/interface'
-import { loginUtils } from '@/utils/login'
+import { loginService } from '@/common/provides/login'
 import { Field, Form, SubmissionHandler } from 'vee-validate'
 import { defineComponent, onMounted } from 'vue'
 export default defineComponent({
@@ -117,7 +117,7 @@ export default defineComponent({
     Field
   },
   setup () {
-    const { getCaptcha, state, loginHandle } = loginUtils()
+    const { getCaptcha, state, loginHandle } = loginService()
     const submit:SubmissionHandler = async (value, form) => {
       console.log('TCl: -> constsubmit:SubmissionHandler= -> value', value)
       const { setErrors, resetForm } = form
@@ -130,7 +130,7 @@ export default defineComponent({
         requestAnimationFrame(() => {
           resetForm()
         })
-      } else {
+      } else if (typeof msg === 'string') {
         setErrors({
           code: msg
         })

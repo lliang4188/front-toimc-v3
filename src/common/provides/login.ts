@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { getCode, login } from '@/api/login'
+import { getCode, login, reg } from '@/api/login'
 import { HttpResponse } from '@/common/interface'
 import router from '@/router'
 import store from '@/store'
 import { v4 as uuidv4 } from 'uuid'
 import { reactive } from 'vue'
 
-export const loginUtils = () => {
+export const loginService = () => {
   let sid = ''
 
   const state = reactive({
     username: '',
+    name: '',
     password: '',
+    repassword: '',
     code: '',
     svg: ''
   })
@@ -48,7 +50,29 @@ export const loginUtils = () => {
       state.username = ''
       state.password = ''
       state.code = ''
-      router.push({ name: 'home' })
+      router.push({ name: 'index' })
+    }
+    return res
+  }
+
+  const regHandle = async () => {
+    const res = await reg({
+      username: state.username,
+      name: state.name,
+      password: state.password,
+      code: state.code,
+      sid: sid
+    })
+
+    const { code } = res as HttpResponse
+    if (code === 200) {
+      // 存储用户的登录名
+      store.commit('setIsLogin', true)
+      state.username = ''
+      state.name = ''
+      state.password = ''
+      state.code = ''
+      router.push({ name: 'login' })
     }
     return res
   }
@@ -56,6 +80,7 @@ export const loginUtils = () => {
   return {
     getCaptcha,
     state,
-    loginHandle
+    loginHandle,
+    regHandle
   }
 }

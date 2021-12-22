@@ -3,7 +3,7 @@
   <router-view/>
   <imooc-footer></imooc-footer>
 </template>
-<script lang="ts">
+<script>
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
 import { defineComponent } from 'vue'
@@ -11,6 +11,9 @@ export default defineComponent({
   components: {
     'imooc-header': Header,
     'imooc-footer': Footer
+  },
+  mounted () {
+    window.vue = this
   }
 })
 </script>
